@@ -11,6 +11,8 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
   const navigate = useNavigate();
   const createdEvents = events?.createdEvents || [];
   const bookedEvents = events?.bookedEvents || [];
+  const [renderToggle, setRenderToggle] = useState(false);
+
   const pageSize = 6;
 
   const [createdPage, setCreatedPage] = useState(1);
@@ -81,17 +83,34 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
       </div>
 
       <div className="bg-white shadow rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-        <div className="aspect-w-16 aspect-h-9">
-          {event?.event_video && (
-            <Plyr
-              source={{
-                type: "video",
-                sources: [{ src: event.event_video, type: "video/mp4" }],
-              }}
-              options={videoOptions}
-            />
-          )}
-        </div>
+        <div className="w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden">
+  {!event?.showVideo && event?.thumbnail && (
+    <img
+      src={event.thumbnail}
+      alt={`${event.event_title} Thumbnail`}
+      className="w-full h-full object-cover object-center cursor-pointer"
+      onClick={() => (event.showVideo = true) && setRenderToggle((prev) => !prev)}
+      onError={() => console.error("Error loading image", event.thumbnail)}
+    />
+  )}
+
+  {!event?.showVideo && !event?.thumbnail && (
+    <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+      No Thumbnail
+    </div>
+  )}
+
+  {event?.showVideo && (
+    <Plyr
+      source={{
+        type: "video",
+        sources: [{ src: event.event_video, type: "video/mp4" }],
+      }}
+      options={videoOptions}
+    />
+  )}
+</div>
+
         <div
           onClick={() => navigate(`/single-event/${event?._id}`)}
           className="p-4 cursor-pointer"
