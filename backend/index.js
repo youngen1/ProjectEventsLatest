@@ -142,6 +142,11 @@ app.use("/api/reviews", reviewRoutes);
 app.use("/api/tickets", ticketRoutes);
 app.use("/api/send", sendEmail);
 
+// Dummy test route for sanity check
+app.get("/api/test", (req, res) => {
+  res.status(200).json({ message: "Test route works!" });
+});
+
 // Static files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
@@ -180,4 +185,5 @@ if (process.env.NODE_ENV !== "production") {
 
 // Export for Vercel
 const serverless = require("serverless-http");
-module.exports.handler = serverless(app);
+module.exports = serverless(app);
+
