@@ -14,7 +14,9 @@
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/backend/index.js" },
-    { "src": "/(.*)", "dest": "/frontend/dist/index.html" }
-  ]
+  { "src": "/api/(.*)", "dest": "/backend/index.js" },
+  { "src": "/(.*\\.(js|css|png|jpg|svg|ico|json|woff2?|ttf|eot|map))$", "dest": "/frontend/dist/$1" },
+  { "src": "/(.*)", "dest": "/frontend/dist/index.html" }
+]
+
 }
