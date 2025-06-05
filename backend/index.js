@@ -184,6 +184,5 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 // Export for Vercel
-const serverless = require("serverless-http");
-module.exports = serverless(app);
+module.exports = app;
 
