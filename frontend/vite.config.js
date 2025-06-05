@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
-    base: '/frontend/dist/', // Explicitly set base path
+    base: '/', 
     define: {
       'process.env': env,
     },
