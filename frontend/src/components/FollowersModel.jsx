@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 const FollowersModel = ({ isOpen, onClose, followers }) => {
   if (!isOpen) return null;
 
+  
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-[10000]">
       <div className="bg-white p-6 rounded-md shadow-lg w-full max-w-md">
