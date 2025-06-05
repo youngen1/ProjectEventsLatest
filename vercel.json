@@ -5,7 +5,8 @@
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist",
+        "outputDirectory": "frontend/dist"
       }
     },
     {
@@ -20,14 +21,12 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/frontend/dist/$1",
-      "headers": {
-        "Cache-Control": "public, max-age=31536000, immutable"
-      }
+      "dest": "/frontend/dist/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/frontend/dist/index.html"
+      "src": "/.*",
+      "dest": "/frontend/dist/index.html",
+      "status": 200
     }
   ]
 }
