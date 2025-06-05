@@ -150,6 +150,15 @@ app.get("/api/test", (req, res) => {
 // Static files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+app.use(express.static(path.join(__dirname, "../frontend/dist")));
+app.get("*", (req, res) => {
+  if (req.path.startsWith("/api")) {
+    return res.status(404).json({ error: "API route not found" });
+  }
+  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
+
 // Health check
 app.get("/", (req, res) => {
   res.status(200).send("Server is healthy");
