@@ -1,0 +1,7 @@
+refactor(backend): remove commented out code from index.js
+
+- Removed legacy commented out code that was no longer in use
+- Improved code readability and maintainability
+- Reduced file size and cognitive load for developers
+
+This change doesn't affect functionality as the removed code was already commented out and not being executed.
