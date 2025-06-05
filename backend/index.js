@@ -50,6 +50,7 @@ const allowedOrigins = [
   "https://www.eventcircle.site",
   "https://eventcircle.site",
   "http://localhost:5173",
+  "https://project-events-latest.vercel.app"
 ];
 
 const corsOptions = {
