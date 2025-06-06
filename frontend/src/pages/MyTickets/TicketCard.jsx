@@ -156,21 +156,43 @@ const TicketCard = ({ ticket }) => {
 
       {/* Event Video */}
       {/* Thumbnail or Video */}
-      {event_video && (
-  <div className="mb-4 relative w-full" style={{ paddingTop: "56.25%" }}>
-    <div className="absolute top-0 left-0 w-full h-full">
+     {event_video && (
+  <div className="mb-4 relative w-full aspect-video rounded overflow-hidden">
+    {showVideo ? (
       <Plyr
         source={{
           type: "video",
           sources: [{ src: event_video, type: getMimeType(event_video) }],
         }}
         options={videoOptions}
-        poster={thumbnail || ""}
         className="w-full h-full"
       />
-    </div>
+    ) : (
+      <div
+        className="w-full h-full cursor-pointer relative"
+        onClick={() => setShowVideo(true)}
+      >
+        <img
+          src={thumbnail}
+          alt="Video thumbnail"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+          <svg
+            className="w-16 h-16 text-white"
+            fill="currentColor"
+            viewBox="0 0 84 84"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="42" cy="42" r="42" fill="rgba(0,0,0,0.6)" />
+            <polygon points="33,24 60,42 33,60" fill="white" />
+          </svg>
+        </div>
+      </div>
+    )}
   </div>
 )}
+
 
 
 
