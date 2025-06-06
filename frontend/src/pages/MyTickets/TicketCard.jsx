@@ -44,6 +44,13 @@ const TicketCard = ({ ticket }) => {
     }
   };
 
+  const getMimeType = (url) => {
+  if (url.endsWith(".mov")) return "video/quicktime";
+  if (url.endsWith(".webm")) return "video/webm";
+  return "video/mp4";
+};
+
+
   const styles = StyleSheet.create({
     page: {
       padding: 20,
@@ -155,7 +162,7 @@ const TicketCard = ({ ticket }) => {
       <Plyr
         source={{
           type: "video",
-          sources: [{ src: event_video, type: "video/mp4" }],
+          sources: [{ src: event_video, type: getMimeType(event_video) }],
         }}
         options={videoOptions}
         poster={thumbnail || ""}
