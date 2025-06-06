@@ -87,7 +87,8 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
       </div>
 
       <div className="bg-white shadow rounded-lg overflow-hidden transition-transform transform hover:scale-105">
-        <div className="w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden">
+        <div className="w-full aspect-video overflow-hidden">
+
   {event?.event_video && !showVideo ? (
     <div
       className="relative w-full h-full cursor-pointer"
@@ -112,7 +113,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
     </div>
   ) : (
     <div className="w-full h-full">
-      <div className="aspect-w-16 aspect-h-9">
+      <div className="w-full h-full">
         <Plyr
           key={showVideo ? 'video-playing' : 'thumbnail'}
           source={{
@@ -120,6 +121,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
             sources: [{ src: event?.event_video, type: "video/mp4" }],
           }}
           options={videoOptions}
+          className="w-full h-full"
         />
       </div>
     </div>
