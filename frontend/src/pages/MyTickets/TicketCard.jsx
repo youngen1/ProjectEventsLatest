@@ -158,14 +158,19 @@ const TicketCard = ({ ticket }) => {
       {/* Thumbnail or Video */}
 {event_video && (
   <div className="mb-4 relative w-full aspect-video rounded overflow-hidden">
-    <Plyr
-        source={{
-          type: "video",
-          sources: [{ src: event_video, type: "video/mp4" }],
-        }}
-        options={videoOptions}
-        className="w-full h-full"
-      />
+   {event_video && (
+        <div className="mb-4">
+          <div className="aspect-w-16 aspect-h-9">
+            <Plyr
+              source={{
+                type: "video",
+                sources: [{ src: event_video, type: "video/mp4" }],
+              }}
+              options={videoOptions}
+            />
+          </div>
+        </div>
+      )}
   </div>
 )}
 
