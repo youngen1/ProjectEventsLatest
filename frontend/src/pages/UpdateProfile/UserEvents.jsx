@@ -91,7 +91,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
 
   {event?.event_video && !showVideo ? (
     <div
-      className="relative w-full aspect-w-16 aspect-h-9 cursor-pointer"
+      className="relative w-full h-full cursor-pointer"
       onClick={() => setShowVideo(true)}
     >
       <img
