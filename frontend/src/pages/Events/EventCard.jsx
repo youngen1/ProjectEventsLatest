@@ -24,7 +24,7 @@ const videoOptions = {
         fallback: true,
         iosNative: true,
     },
-    clickToPlay: true,
+    autoPlay: true,
     ratio: "16:9",
     previewThumbnails: { enabled: false }, 
 };
