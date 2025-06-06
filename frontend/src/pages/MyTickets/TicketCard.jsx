@@ -161,7 +161,7 @@ const TicketCard = ({ ticket }) => {
     <Plyr
         source={{
           type: "video",
-          sources: [{ src: event_video, type: getMimeType(event_video) }],
+          sources: [{ src: event_video, type: "video/mp4" }],
         }}
         options={videoOptions}
         className="w-full h-full"
