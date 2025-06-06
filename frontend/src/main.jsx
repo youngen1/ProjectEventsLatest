@@ -5,7 +5,7 @@ import './index.css';
 import { AuthProvider } from "./context/AuthContext.jsx";
 import { LoadScript } from "@react-google-maps/api";
 
-const libraries = ["places"];
+const  libraries = ["places"];
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
