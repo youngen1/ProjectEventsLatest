@@ -27,12 +27,15 @@ const TicketCard = ({ ticket }) => {
     age_restriction,
     gender_restriction,
     event_video,
+    thumbnail,
     event_duration,
     created_by, // Host information: profile picture, name, and email
   } = ticket;
 
   const qrCodeRef = useRef(null);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [showVideo, setShowVideo] = useState(false);
+
 
   const generateQrCodeUrl = async () => {
     if (qrCodeRef.current) {
@@ -145,19 +148,37 @@ const TicketCard = ({ ticket }) => {
       </div>
 
       {/* Event Video */}
-      {event_video && (
-        <div className="mb-4">
-          <div className="aspect-w-16 aspect-h-9">
-            <Plyr
-              source={{
-                type: "video",
-                sources: [{ src: event_video, type: "video/mp4" }],
-              }}
-              options={videoOptions}
-            />
-          </div>
-        </div>
-      )}
+      {/* Thumbnail or Video */}
+{event_video && (
+  <div className="mb-4 w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden">
+    {!showVideo && thumbnail && (
+      <img
+        src={thumbnail}
+        alt={`${event_title} Thumbnail`}
+        className="w-full h-full object-cover object-center cursor-pointer"
+        onClick={() => setShowVideo(true)}
+        onError={() => console.error("Error loading image", thumbnail)}
+      />
+    )}
+
+    {!showVideo && !thumbnail && (
+      <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+        No Thumbnail
+      </div>
+    )}
+
+    {showVideo && (
+      <Plyr
+        source={{
+          type: "video",
+          sources: [{ src: event_video, type: "video/mp4" }],
+        }}
+        options={videoOptions}
+      />
+    )}
+  </div>
+)}
+
 
       {/* Event Details */}
       <h2 className="text-xl font-bold mb-4">{event_title}</h2>
