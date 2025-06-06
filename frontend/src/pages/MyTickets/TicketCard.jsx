@@ -156,7 +156,7 @@ const TicketCard = ({ ticket }) => {
 
       {/* Event Video */}
       {/* Thumbnail or Video */}
-     {event_video && (
+{event_video && (
   <div className="mb-4 relative w-full aspect-video rounded overflow-hidden">
     {showVideo ? (
       <Plyr
