@@ -125,6 +125,7 @@ const TicketCard = ({ ticket }) => {
       "volume",
       "fullscreen",
     ],
+     autoplay: true,
   };
 
   return (
@@ -184,7 +185,7 @@ const TicketCard = ({ ticket }) => {
             type: "video",
             sources: [{ src: event_video, type: "video/mp4" }],
           }}
-          options={...videoOptions, autoplay: true}
+          options={videoOptions}
         />
       </div>
     </div>
