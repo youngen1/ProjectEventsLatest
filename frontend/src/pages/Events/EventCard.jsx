@@ -58,28 +58,25 @@ const EventCard = ({
 
 
     useEffect(() => {
-        if (isInView && playerRef.current && !player) {
-            setPlayer(playerRef.current.plyr);
-        }
+    if (isInView && playerRef.current && !player && showVideo) {
+        const plyrInstance = playerRef.current.plyr;
+        setPlayer(plyrInstance);
+    }
 
-        return () => {
-            if (player) {
-                player.destroy(); // Destroy on unmount or when out of view
-                setPlayer(null); // Clear player instance
-            }
-        };
-    }, [isInView, player]);
-
-
-    const handlePlayClick = () => {
+    return () => {
         if (player) {
-          setShowVideo(true); // Show the video player
-            player.play();    // Autoplay
-        } else {
-          console.error("Plyr instance not available."); //Handle cases where player isn't ready.
+            player.destroy();
+            setPlayer(null);
         }
-
     };
+}, [isInView, player, showVideo]);
+
+
+
+  const handlePlayClick = () => {
+    setShowVideo(true); // Will trigger useEffect to load player
+};
+
 
     const handleImageError = () => {
         console.error("Error loading image:", thumbnail);
@@ -121,38 +118,47 @@ const EventCard = ({
 
             <div className="bg-white shadow rounded-lg overflow-hidden transition-transform transform hover:scale-105">
 
-              <div className="w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden">
-                    {/* Show Thumbnail Initially */}
-                    {!showVideo && thumbnail && (
-                        <img
-                            src={thumbnail}
-                            alt={event_title + " Thumbnail"}
-                            className="w-full h-full object-cover object-center cursor-pointer"
-                            onClick={handlePlayClick}
-                            onError={handleImageError}
-                        />
-                    )}
+            <div className="w-full aspect-w-16 aspect-h-9 overflow-hidden">
 
-                   {!showVideo && !thumbnail && (
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
-                          No Thumbnail
-                        </div>
-                   )}
+  {event_video && !showVideo ? (
+    <div
+      className="relative w-full h-full cursor-pointer"
+      onClick={() => setShowVideo(true)}
+    >
+      <img
+        src={thumbnail}
+        alt="Video thumbnail"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+        <svg
+          className="w-16 h-16 text-white"
+          fill="currentColor"
+          viewBox="0 0 84 84"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="42" cy="42" r="42" fill="rgba(0,0,0,0.6)" />
+          <polygon points="33,24 60,42 33,60" fill="white" />
+        </svg>
+      </div>
+    </div>
+  ) : (
+   
+     <div className="w-full aspect-w-16 aspect-h-9">
 
-                    {/* Show Video Player on Click (and if in view) */}
-                    {showVideo && isInView && (
-                        <Plyr
-                            ref={playerRef}
-                            source={{
-                                type: "video",
-                                sources: [{ src: event_video, type: "video/mp4" }],
-                            }}
-                            options={videoOptions}
-                            onError={handleVideoError} // Handle video errors
-                        />
-                    )}
-                    {videoError && (<div className="w-full h-full bg-red-200 flex items-center justify-center text-red-500">Error Loading Video.</div>)}
-                </div>
+        <Plyr
+          key={showVideo ? 'video-playing' : 'thumbnail'}
+          source={{
+            type: "video",
+            sources: [{ src: event_video, type: "video/mp4" }],
+          }}
+          options={videoOptions}
+        />
+      </div>
+    
+  )}
+  
+</div>
 
                 <div
                     onClick={() => handleEventClick(_id)}
