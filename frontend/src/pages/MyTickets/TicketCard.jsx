@@ -149,41 +149,22 @@ const TicketCard = ({ ticket }) => {
 
       {/* Event Video */}
       {/* Thumbnail or Video */}
-{event_video && (
-  <div className="mb-4 w-full aspect-video relative rounded-lg overflow-hidden">
-    {!showVideo ? (
-      <img
-        src={thumbnail}
-        alt={`${event_title} Thumbnail`}
-        className="absolute top-0 left-0 w-full h-full object-cover cursor-pointer transition-opacity duration-300"
-        onClick={() => setShowVideo(true)}
-        onError={() => console.error("Error loading image", thumbnail)}
+      {event_video && (
+  <div className="mb-4 relative w-full" style={{ paddingTop: "56.25%" }}>
+    <div className="absolute top-0 left-0 w-full h-full">
+      <Plyr
+        source={{
+          type: "video",
+          sources: [{ src: event_video, type: "video/mp4" }],
+        }}
+        options={videoOptions}
+        poster={thumbnail || ""}
+        className="w-full h-full"
       />
-    ) : (
-      <div className="absolute top-0 left-0 w-full h-full">
-        <Plyr
-          source={{
-            type: "video",
-            sources: [{ src: event_video, type: "video/mp4" }],
-          }}
-          options={{
-            autoplay: true,
-            controls: [
-              "play-large",
-              "play",
-              "progress",
-              "current-time",
-              "mute",
-              "volume",
-              "fullscreen",
-            ],
-          }}
-          className="w-full h-full"
-        />
-      </div>
-    )}
+    </div>
   </div>
 )}
+
 
 
 
