@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <LoadScript
-        googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+        googleMapsApiKey="AIzaSyAsvpRyz_UMpIJ63M86Yj-oSEHZlCQlN0o"
         libraries={libraries}
         loadingElement={<div>Loading...</div>}
         onLoad={(data) => console.log("Google Maps Loaded", data)}
