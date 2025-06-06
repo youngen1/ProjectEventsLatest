@@ -424,6 +424,7 @@ exports.getMyTickets = async (req, res) => {
   try {
     const user = await User.findById(userId).populate({
       path: "my_tickets",
+      options: { sort: { createdAt: -1 } },
       populate: {
         path: "created_by",
         select: "fullname username email profile_picture",
