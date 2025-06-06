@@ -150,24 +150,25 @@ const TicketCard = ({ ticket }) => {
       {/* Event Video */}
       {/* Thumbnail or Video */}
 {event_video && (
-  <div className="mb-4 w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden">
-    {!showVideo && thumbnail && (
-      <img
-        src={thumbnail}
-        alt={`${event_title} Thumbnail`}
-        className="w-full h-full object-cover object-center cursor-pointer"
-        onClick={() => setShowVideo(true)}
-        onError={() => console.error("Error loading image", thumbnail)}
-      />
-    )}
+  <div className="mb-4 w-full relative" style={{ paddingTop: "56.25%" /* 16:9 aspect ratio */ }}>
+  {!showVideo && thumbnail && (
+    <img
+      src={thumbnail}
+      alt={`${event_title} Thumbnail`}
+      className="absolute top-0 left-0 w-full h-full object-cover object-center cursor-pointer"
+      onClick={() => setShowVideo(true)}
+      onError={() => console.error("Error loading image", thumbnail)}
+    />
+  )}
 
-    {!showVideo && !thumbnail && (
-      <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
-        No Thumbnail
-      </div>
-    )}
+  {!showVideo && !thumbnail && (
+    <div className="absolute top-0 left-0 w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
+      No Thumbnail
+    </div>
+  )}
 
-    {showVideo && (
+  {showVideo && (
+    <div className="absolute top-0 left-0 w-full h-full">
       <Plyr
         source={{
           type: "video",
@@ -175,8 +176,10 @@ const TicketCard = ({ ticket }) => {
         }}
         options={videoOptions}
       />
-    )}
-  </div>
+    </div>
+  )}
+</div>
+
 )}
 
 
