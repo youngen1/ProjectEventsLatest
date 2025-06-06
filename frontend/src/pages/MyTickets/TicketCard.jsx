@@ -167,6 +167,7 @@ const TicketCard = ({ ticket }) => {
                 sources: [{ src: event_video, type: "video/mp4" }],
               }}
               options={videoOptions}
+              poster={thumbnail || ""}
             />
           </div>
         </div>
