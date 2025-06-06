@@ -17,7 +17,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
 
   const [createdPage, setCreatedPage] = useState(1);
   const [bookedPage, setBookedPage] = useState(1);
-  const [showVideo, setShowVideo] = useState(false);
+
 
   const paginatedCreated = createdEvents.slice(
     (createdPage - 1) * pageSize,
@@ -62,7 +62,9 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
     navigate(`/events/edit/${eventId}`); // Corrected navigation path
   };
 
-  const EventCard = ({ event }) => (
+  const EventCard = ({ event }) => {
+      const [showVideo, setShowVideo] = useState(false);
+    return (
     <div key={event._id} className="relative">
       <div
         className="absolute -top-5 -right-2 z-[1000] cursor-pointer"
@@ -225,7 +227,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
       </div>
     </div>
   );
-
+}
   return (
     <div>
       <h2 className="text-base font-semibold leading-7 text-gray-900">
