@@ -11,24 +11,16 @@ import { useInView } from "react-intersection-observer"; // Import hook
 
 const videoOptions = {
     controls: [
-        "play-large",
-        "play",
-        "progress",
-        "current-time",
-        "mute",
-        "volume",
-        "fullscreen",
+      "play-large",
+      "play",
+      "progress",
+      "current-time",
+      "mute",
+      "volume",
+      "fullscreen",
     ],
-    fullscreen: {
-        enabled: false,
-        fallback: true,
-        iosNative: true,
-    },
-    autoPlay: true,
-    ratio: "16:9",
-    previewThumbnails: { enabled: false }, 
-};
-
+     autoplay: true, 
+  };
 const EventCard = ({
     _id,
     event_title,
