@@ -70,7 +70,6 @@ const EventDetails = () => {
       .catch((error) => {
         console.log("Error fetching reviews: ", error);
       });
-    console.log(" user is" , user ," userHasReviewed " , userHasReviewed , " moment thing is " , moment().isAfter(eventDetails.event_date_and_time) );
   }, [id, user]);
 
   const handleBookTicket = async (eventId) => {
@@ -452,7 +451,7 @@ const EventDetails = () => {
           </div>
 
           {/* Add Review Form */}
-          {user && !userHasReviewed && moment().isAfter(eventDetails.event_date_and_time) && (
+          {user && !userHasReviewed) && (
             <div className="bg-white p-4 rounded-lg shadow mb-6">
               <h3 className="text-lg font-semibold mb-4">Write a Review</h3>
               <div className="flex items-center mb-4">
