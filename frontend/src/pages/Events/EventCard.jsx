@@ -10,6 +10,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useInView } from "react-intersection-observer"; // Import hook
 
 
+
 const EventCard = ({
     _id,
     event_title,
