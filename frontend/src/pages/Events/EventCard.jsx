@@ -134,7 +134,7 @@ const EventCard = ({
             type: "video",
             sources: [{ src: event_video, type: "video/mp4" }],
           }}
-          options={
+          options={{
     controls: [
       "play-large",
       "play",
@@ -144,8 +144,8 @@ const EventCard = ({
       "volume",
       "fullscreen",
     ],
-     autoplay: showVideo, 
-  }
+    autoplay: showVideo,
+  }}
         />
       </div>
     
