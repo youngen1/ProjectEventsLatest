@@ -37,7 +37,7 @@ console.log("axiosInstance imported:", axiosInstance); // Check if it's defined
 
 console.log("App component rendered");
 
-console.log("Firebase API Key:", import.meta.env.REACT_APP_FIREBASE_API_KEY);
+console.log("Firebase API Key:", import.meta.env.VITE_FIREBASE_API_KEY);
 
 function App() {
   const { setUser, user } = useAuth();
