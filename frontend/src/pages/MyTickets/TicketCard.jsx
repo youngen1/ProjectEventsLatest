@@ -179,11 +179,12 @@ const TicketCard = ({ ticket }) => {
     <div className="w-full h-full">
       <div className="aspect-w-16 aspect-h-9">
         <Plyr
+          key={showVideo ? 'video-playing' : 'thumbnail'}
           source={{
             type: "video",
             sources: [{ src: event_video, type: "video/mp4" }],
           }}
-          options={videoOptions}
+          options={...videoOptions, autoplay: true}
         />
       </div>
     </div>
