@@ -17,6 +17,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
 
   const [createdPage, setCreatedPage] = useState(1);
   const [bookedPage, setBookedPage] = useState(1);
+  const [showVideo, setShowVideo] = useState(false);
 
   const paginatedCreated = createdEvents.slice(
     (createdPage - 1) * pageSize,
@@ -38,6 +39,7 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
       "volume",
       "fullscreen",
     ],
+     autoplay: true, 
   };
 
   const handleShare = (event) => {
@@ -84,30 +86,41 @@ const UserEvents = ({ events, isOwnProfile, onDeleteEvent }) => {
 
       <div className="bg-white shadow rounded-lg overflow-hidden transition-transform transform hover:scale-105">
         <div className="w-full h-[200px] md:h-[250px] lg:h-[300px] overflow-hidden">
-  {!event?.showVideo && event?.thumbnail && (
-    <img
-      src={event.thumbnail}
-      alt={`${event.event_title} Thumbnail`}
-      className="w-full h-full object-cover object-center cursor-pointer"
-      onClick={() => (event.showVideo = true) && setRenderToggle((prev) => !prev)}
-      onError={() => console.error("Error loading image", event.thumbnail)}
-    />
-  )}
-
-  {!event?.showVideo && !event?.thumbnail && (
-    <div className="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">
-      No Thumbnail
+  {event?.event_video && !showVideo ? (
+    <div
+      className="relative w-full h-full cursor-pointer"
+      onClick={() => setShowVideo(true)}
+    >
+      <img
+        src={event?.thumbnail}
+        alt="Video thumbnail"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+        <svg
+          className="w-16 h-16 text-white"
+          fill="currentColor"
+          viewBox="0 0 84 84"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="42" cy="42" r="42" fill="rgba(0,0,0,0.6)" />
+          <polygon points="33,24 60,42 33,60" fill="white" />
+        </svg>
+      </div>
     </div>
-  )}
-
-  {event?.showVideo && (
-    <Plyr
-      source={{
-        type: "video",
-        sources: [{ src: event.event_video, type: "video/mp4" }],
-      }}
-      options={videoOptions}
-    />
+  ) : (
+    <div className="w-full h-full">
+      <div className="aspect-w-16 aspect-h-9">
+        <Plyr
+          key={showVideo ? 'video-playing' : 'thumbnail'}
+          source={{
+            type: "video",
+            sources: [{ src: event?.event_video, type: "video/mp4" }],
+          }}
+          options={videoOptions}
+        />
+      </div>
+    </div>
   )}
 </div>
 
