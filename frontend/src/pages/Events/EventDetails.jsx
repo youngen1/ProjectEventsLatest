@@ -21,6 +21,9 @@ const EventDetails = () => {
   const [userHasReviewed, setUserHasReviewed] = useState(false);
   const [averageRating, setAverageRating] = useState(0);
 
+
+
+  
   const defaultAvatar = "/default-avatar.png"; // Need to add a default avatar
 
   useEffect(() => {
@@ -67,6 +70,7 @@ const EventDetails = () => {
       .catch((error) => {
         console.log("Error fetching reviews: ", error);
       });
+    console.log(" user is" , user ," userHasReviewed " , userHasReviewed , " moment thing is " , moment().isAfter(eventDetails.event_date_and_time) );
   }, [id, user]);
 
   const handleBookTicket = async (eventId) => {
