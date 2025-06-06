@@ -451,7 +451,7 @@ const EventDetails = () => {
           </div>
 
           {/* Add Review Form */}
-          {user && !userHasReviewed) && (
+          {user && !userHasReviewed && (
             <div className="bg-white p-4 rounded-lg shadow mb-6">
               <h3 className="text-lg font-semibold mb-4">Write a Review</h3>
               <div className="flex items-center mb-4">
