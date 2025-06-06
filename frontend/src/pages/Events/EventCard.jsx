@@ -49,19 +49,19 @@ const EventCard = ({
     const [videoError, setVideoError] = useState(false);
 
 
-    useEffect(() => {
-    if (isInView && playerRef.current && !player && showVideo) {
-        const plyrInstance = playerRef.current.plyr;
-        setPlayer(plyrInstance);
-    }
+//     useEffect(() => {
+//     if (isInView && playerRef.current && !player && showVideo) {
+//         const plyrInstance = playerRef.current.plyr;
+//         setPlayer(plyrInstance);
+//     }
 
-    return () => {
-        if (player) {
-            player.destroy();
-            setPlayer(null);
-        }
-    };
-}, [isInView, player, showVideo]);
+//     return () => {
+//         if (player) {
+//             player.destroy();
+//             setPlayer(null);
+//         }
+//     };
+// }, [isInView, player, showVideo]);
 
 
 
