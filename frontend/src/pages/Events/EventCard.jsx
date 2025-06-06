@@ -9,18 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { useInView } from "react-intersection-observer"; // Import hook
 
-const videoOptions = {
-    controls: [
-      "play-large",
-      "play",
-      "progress",
-      "current-time",
-      "mute",
-      "volume",
-      "fullscreen",
-    ],
-     autoplay: true, 
-  };
+
 const EventCard = ({
     _id,
     event_title,
@@ -144,7 +133,18 @@ const EventCard = ({
             type: "video",
             sources: [{ src: event_video, type: "video/mp4" }],
           }}
-          options={videoOptions}
+          options={
+    controls: [
+      "play-large",
+      "play",
+      "progress",
+      "current-time",
+      "mute",
+      "volume",
+      "fullscreen",
+    ],
+     autoplay: showVideo, 
+  }
         />
       </div>
     
