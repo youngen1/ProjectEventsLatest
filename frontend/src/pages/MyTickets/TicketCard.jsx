@@ -44,11 +44,6 @@ const TicketCard = ({ ticket }) => {
     }
   };
 
-  const getMimeType = (url) => {
-  if (url.endsWith(".mov")) return "video/quicktime";
-  if (url.endsWith(".webm")) return "video/webm";
-  return "video/mp4";
-};
 
 
   const styles = StyleSheet.create({
@@ -158,20 +153,41 @@ const TicketCard = ({ ticket }) => {
       {/* Thumbnail or Video */}
 {event_video && (
   <div className="mb-4 relative w-full aspect-video rounded overflow-hidden">
-   {event_video && (
-        <div className="mb-4">
-          <div className="aspect-w-16 aspect-h-9">
-            <Plyr
-              source={{
-                type: "video",
-                sources: [{ src: event_video, type: "video/mp4" }],
-              }}
-              options={videoOptions}
-              poster={thumbnail || ""}
-            />
-          </div>
-        </div>
-      )}
+   {event_video && !showVideo ? (
+    <div
+      className="relative w-full h-full cursor-pointer"
+      onClick={() => setShowVideo(true)}
+    >
+      <img
+        src={thumbnail}
+        alt="Video thumbnail"
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+        <svg
+          className="w-16 h-16 text-white"
+          fill="currentColor"
+          viewBox="0 0 84 84"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <circle cx="42" cy="42" r="42" fill="rgba(0,0,0,0.6)" />
+          <polygon points="33,24 60,42 33,60" fill="white" />
+        </svg>
+      </div>
+    </div>
+  ) : (
+    <div className="w-full h-full">
+      <div className="aspect-w-16 aspect-h-9">
+        <Plyr
+          source={{
+            type: "video",
+            sources: [{ src: event_video, type: "video/mp4" }],
+          }}
+          options={videoOptions}
+        />
+      </div>
+    </div>
+  )}
   </div>
 )}
 
